@@ -15,7 +15,7 @@ func _process(delta: float):
 	
 	var accel = force/mass
 	
-	velocity = (velocity * accel * delta)
+	velocity = Vector3(0,0,1)
 	
 	move_and_slide()
 	

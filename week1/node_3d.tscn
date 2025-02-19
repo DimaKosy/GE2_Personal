@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+[sub_resource type="PrismMesh" id="PrismMesh_noarx"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -17,12 +17,13 @@ target = NodePath("../Marker3D")
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
-mesh = SubResource("BoxMesh_a0tk4")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_noarx")
 skeleton = NodePath("../..")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6347, 0, 29.22)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -6.90252e-16, -8.74228e-08, -4.47183e-08, 0.859272, 0.511518, 7.512e-08, 0.511518, -0.859272, -2.10584, 5.72054, -6.61187)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.32221, 8.706, -0.17758)
 script = ExtResource("2_noarx")
