@@ -1,21 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://bobhh8sodxe0n"]
 
-[ext_resource type="Script" uid="uid://dyffxutek35p1" path="res://boid.gd" id="1_a202f"]
-[ext_resource type="Script" uid="uid://bk0b8ybshuwkf" path="res://camera_3d.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://dyffxutek35p1" path="res://boid.gd" id="1_okq71"]
+[ext_resource type="Script" uid="uid://bk0b8ybshuwkf" path="res://camera_3d.gd" id="2_wosnj"]
+[ext_resource type="Script" uid="uid://cbsr2sq4qc1wm" path="res://Scenes/WallGen.gd" id="3_t3l2h"]
+[ext_resource type="PackedScene" uid="uid://b8bovevalyf48" path="res://Scenes/wall.tscn" id="4_wosnj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_noarx"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
-size = Vector3(0.5, 1, 30)
-
-[sub_resource type="BoxMesh" id="BoxMesh_r3fl7"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("1_a202f")
+script = ExtResource("1_okq71")
 target = NodePath("../Marker3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -34,15 +31,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.322
 visible = false
 projection = 1
 size = 16.161
-script = ExtResource("2_noarx")
+script = ExtResource("2_wosnj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.88591, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89879, 0, 0)
-shape = SubResource("BoxShape3D_a0tk4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
-mesh = SubResource("BoxMesh_r3fl7")
+[node name="WallGen" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8038, 0, 0)
+script = ExtResource("3_t3l2h")
+Wall = ExtResource("4_wosnj")
