@@ -1,0 +1,6 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[resource]
+class_name = "MyClass"
+script_class_name = ""
+library = "res://bin/my_library.gdnlib"

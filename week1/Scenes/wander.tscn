@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnqpe8e0a1xjs"]
+[gd_scene load_steps=6 format=3 uid="uid://cnqpe8e0a1xjs"]
 
+[ext_resource type="Script" uid="uid://ce2f5ef78q05n" path="res://Scenes/wander.gd" id="1_7g5uk"]
 [ext_resource type="Script" uid="uid://b8aey7h07one4" path="res://Scenes/character_body_2d.gd" id="1_iv7b3"]
 [ext_resource type="Texture2D" uid="uid://diu8csinfj68a" path="res://icon.svg" id="2_7g5uk"]
 [ext_resource type="Texture2D" uid="uid://8adka60uciup" path="res://assets/Cartoon_green_texture_grass.jpg" id="3_1fx7j"]
@@ -7,6 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uiaow"]
 
 [node name="Wander" type="Node2D"]
+script = ExtResource("1_7g5uk")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_iv7b3")

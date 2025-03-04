@@ -1,0 +1,5 @@
+[entry]
+Windows.64 = "res://bin/my_library.dll"
+
+[dependencies]
+Windows.64 = []
