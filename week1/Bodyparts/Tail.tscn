@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://boshf7nley1gw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iu5rh"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_rmuvi"]
+size = Vector3(15, 18, 1)
+
+[node name="Body" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iu5rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+mesh = SubResource("PrismMesh_rmuvi")

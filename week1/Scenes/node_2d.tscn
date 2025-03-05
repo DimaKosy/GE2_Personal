@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://v4cnsxi6sxbh"]
+[gd_scene load_steps=10 format=4 uid="uid://v4cnsxi6sxbh"]
 
 [ext_resource type="Texture2D" uid="uid://cvlodduecaf3k" path="res://assets/Hana Caraka - Farming n Foraging [sample]/misc.png" id="1_v1qfn"]
 [ext_resource type="Texture2D" uid="uid://uf8f3g7w6xjm" path="res://assets/Hana Caraka - Farming n Foraging [sample]/info.png" id="2_hh5uf"]
 [ext_resource type="Script" uid="uid://7i5qvypj3n3q" path="res://Scenes/rigid_body_2d.gd" id="3_6whob"]
 [ext_resource type="Texture2D" uid="uid://diu8csinfj68a" path="res://icon.svg" id="4_6whob"]
+[ext_resource type="PackedScene" uid="uid://dqe3uj4j86a2o" path="res://Bodyparts/Head.tscn" id="5_u7krg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6whob"]
 texture = ExtResource("2_hh5uf")
@@ -216,3 +217,6 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_6whob")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+
+[node name="Body" parent="." instance=ExtResource("5_u7krg")]
+position = Vector2(-150, 0)
