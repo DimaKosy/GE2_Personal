@@ -1,4 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqe3uj4j86a2o"]
+[gd_scene load_steps=8 format=3 uid="uid://dqe3uj4j86a2o"]
+
+[ext_resource type="Script" uid="uid://dhc1osnfn40v6" path="res://Bodyparts/head.gd" id="1_3apls"]
+[ext_resource type="PackedScene" uid="uid://b4ku1wncvsy0d" path="res://Bodyparts/body.tscn" id="2_n1shd"]
+[ext_resource type="PackedScene" uid="uid://boshf7nley1gw" path="res://Bodyparts/Tail.tscn" id="3_0jvr3"]
 
 [sub_resource type="Shader" id="Shader_iu5rh"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.beta1's StandardMaterial3D.
@@ -72,8 +76,11 @@ height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iu5rh"]
 
-[node name="Body" type="RigidBody2D"]
+[node name="Head" type="RigidBody2D"]
 gravity_scale = 0.0
+script = ExtResource("1_3apls")
+body = ExtResource("2_n1shd")
+tail = ExtResource("3_0jvr3")
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 modulate = Color(0.250548, 0.6044, 0.545715, 1)
@@ -87,3 +94,5 @@ modulate = Color(0.250548, 0.6044, 0.545715, 1)
 position = Vector2(-1.19209e-07, -8)
 scale = Vector2(0.57551, 0.862975)
 mesh = SubResource("SphereMesh_wklp8")
+
+[node name="body_segments" type="Node2D" parent="."]

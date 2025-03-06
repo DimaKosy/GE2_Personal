@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb8uywbnep3y7"]
+
+[ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://snake.gd" id="1_16tbv"]
+
+[sub_resource type="Curve" id="Curve_16tbv"]
+_limits = [0.05, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0.05), 0.0215103, 0.0, 0, 0]
+point_count = 2
+
+[node name="Node2D" type="Line2D"]
+position = Vector2(54, 51)
+width_curve = SubResource("Curve_16tbv")
+script = ExtResource("1_16tbv")
+max_angle_degrees = 75.0
