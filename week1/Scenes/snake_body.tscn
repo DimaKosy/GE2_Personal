@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb8uywbnep3y7"]
 
-[ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://snake.gd" id="1_16tbv"]
+[ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://snake_body.gd" id="1_16tbv"]
 
 [sub_resource type="Curve" id="Curve_16tbv"]
 _limits = [0.05, 3.0, 0.0, 1.0]
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0.05), 0.0215103, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 2.46947), 0.0, -2.78427, 0, 0, Vector2(0.705882, 1.47528), -4.86849, -4.86849, 0, 0, Vector2(1, 0.38146), -1.45415, 0.0, 0, 0]
+point_count = 3
 
-[node name="Node2D" type="Line2D" node_paths=PackedStringArray("target")]
+[node name="Body" type="Line2D"]
 width_curve = SubResource("Curve_16tbv")
 script = ExtResource("1_16tbv")
 segment_count = 10
@@ -15,4 +15,3 @@ segment_length = 60
 leg_gap = 3
 leg_target_pos = Vector2(80, -20)
 foot_reset_circle = 40
-target = NodePath("")
