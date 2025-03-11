@@ -8,8 +8,8 @@ extends Line2D
 @export var leg_end = 3
 @export var leg_target_pos = Vector2(50,10)
 @export var foot_reset_circle = 30
-
 @export var inter_rate = 0.5
+@export var target:Node2D
 
 var leg_indices:Array[int]
 var leg_left_position:Array[Vector2]
@@ -52,7 +52,7 @@ func _ready() -> void:
 		pass	
 	pass
 
-func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_joint:Array):
+func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_joint:Array, side:int):
 	var cur_pos = leg_joint[leg_index][0]
 	
 	var set_point = cur_pos + (destination - cur_pos) * inter_rate
@@ -63,7 +63,7 @@ func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_jo
 		var prev_pos = leg_joint[leg_index][i - 1]
 		var to_cur = cur_pos - prev_pos
 
-		# Normalize direction and clamp distance
+		
 		var direction = to_cur.normalized()
 		var target_pos = prev_pos + direction * segment_length
 
@@ -75,11 +75,34 @@ func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_jo
 	for i in range(0,leg_joint[leg_index].size()):
 		leg_joint[leg_index][i] -= (last_joint_pos - source)
 		pass
+	
+	#limit the rotation
+	var cross_offset = leg_joint[leg_index][2] - leg_joint[leg_index][0]
+	var point_offset = leg_joint[leg_index][1] - leg_joint[leg_index][0]
+	
+	var direction = cross_offset.normalized()
+	direction = Vector2(-direction.y, direction.x)
+	
+	
+	var cross_prod = cross_offset.cross(point_offset)
+	if(cross_prod * side <= 0):
+		return
+	
+	#if(side == -1):
+		#leg_joint[leg_index][1] = leg_joint[leg_index][1] + cross_prod * direction + Vector2(0.5,0.5)
+		#pass
+	#if(side == 1):
+		#leg_joint[leg_index][1] = leg_joint[leg_index][1] - cross_prod * direction - Vector2(0.5,0.5)
+		#pass
+	
 	pass
 
 func _process(delta: float) -> void:
-	var mouse_pos = get_point_position(0) + (get_local_mouse_position() - get_point_position(0)) * inter_rate
-	set_point_position(0, mouse_pos)
+
+	var target_pos = get_point_position(0) + (target.global_position - get_point_position(0)) * inter_rate
+	
+	set_point_position(0, target_pos)
+	
 
 	for i in range(1, get_point_count()):
 		var cur_pos = get_point_position(i)
@@ -88,7 +111,7 @@ func _process(delta: float) -> void:
 
 		# Normalize direction and clamp distance
 		var direction = to_cur.normalized()
-		var target_pos = prev_pos + direction * segment_length
+		target_pos = prev_pos + direction * segment_length
 
 		# Angle limiting
 		if i > 1:
@@ -110,16 +133,16 @@ func _process(delta: float) -> void:
 		leg_right_position[i] = get_point_position(leg_indices[i]) + (direction * leg_target_pos.y) + (right_direction * leg_target_pos.x)
 		
 		if leg_left_position[i].distance_to(foot_left_target[i]) > foot_reset_circle:
-			foot_left_target[i] = leg_left_position[i] + (leg_left_position[i] - foot_left_target[i]).normalized()*foot_reset_circle
+			foot_left_target[i] = leg_left_position[i] #+ (leg_left_position[i] - foot_left_target[i]).normalized()*foot_reset_circle
 			
 			pass
 		
 		if leg_right_position[i].distance_to(foot_right_target[i]) > foot_reset_circle:
-			foot_right_target[i] = leg_right_position[i] + (leg_right_position[i] - foot_right_target[i]).normalized()*foot_reset_circle
+			foot_right_target[i] = leg_right_position[i]#leg_right_position[i] + (leg_right_position[i] - foot_right_target[i]).normalized()*foot_reset_circle
 			
 			pass
-		leg_joint_update(get_point_position(leg_indices[i]), foot_left_target[i], i, leg_joints_left)
-		leg_joint_update(get_point_position(leg_indices[i]), foot_right_target[i], i, leg_joints_right)
+		leg_joint_update(get_point_position(leg_indices[i]), foot_left_target[i], i, leg_joints_left, -1)
+		leg_joint_update(get_point_position(leg_indices[i]), foot_right_target[i], i, leg_joints_right, 1)
 		pass
 	pass
 
