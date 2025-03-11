@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 @export var mass = 1
-@export var max_speed = 80
-@export var circle_distance = 50
-@export var circle_size = 50
+@export var max_speed = 100
+@export var speed:float = 100	
+
 var force = Vector2(0,0)
 var ran_dir = 0.0
 var time = 0
@@ -12,7 +12,32 @@ var ray_length = 400
 var ray_origin = Vector2(0,0)
 var ray_target1 = Vector2(0,0)
 var ray_target2 = Vector2(0,0)
-@export var speed:float = 100	
+
+
+@export var segment_count = 7
+@export var segment_length = 20
+@export var max_angle_degrees = 50.0
+@export var leg_start = 2
+@export var leg_gap = 2
+@export var leg_end = 3
+@export var leg_target_pos = Vector2(80,-30)
+@export var foot_reset_circle = 60
+
+func calculate(delta:float):
+	var polygon_node := find_child("Area2D").get_child(0) as CollisionPolygon2D
+	var los: PackedVector2Array = polygon_node.polygon
+
+	# Transform polygon points into global space
+	var transformed_points: PackedVector2Array = []
+	for point in los:
+		transformed_points.append(polygon_node.global_transform * point)
+
+	if Geometry2D.is_point_in_polygon(get_global_mouse_position(), transformed_points):
+		rotation = (get_global_mouse_position() - global_position).angle()
+		return
+	ray_detection()
+	
+	pass
 
 func ray_detection():
 	var space_state = get_world_2d().direct_space_state
@@ -59,13 +84,12 @@ func wander(delta: float) -> Vector2:
 	return direction
 
 
-func _process(delta: float):
-	
+func _process(delta: float):	
 	force = Vector2(0,0)
+	calculate(delta)
 	force += wander(delta)
-	ray_detection()
 	
-	velocity += force * max_speed * delta
+	velocity += force * max_speed * delta * 0.9
 	
 	velocity = velocity.normalized() * min(velocity.length(), max_speed)
 	
@@ -78,7 +102,7 @@ func _process(delta: float):
 	queue_redraw()
 
 func _draw() -> void:
-	draw_line(Vector2(0,0), 300*force.rotated(-velocity.angle()), Color(255,0,255), 1)
-	draw_line(ray_origin - global_position, (ray_target1 - global_position).rotated(-rotation), Color.RED,3)
-	draw_line(ray_origin - global_position, (ray_target2 - global_position).rotated(-rotation), Color.RED,3)
+	#draw_line(Vector2(0,0), 300*force.rotated(-velocity.angle()), Color(255,0,255), 1)
+	#draw_line(ray_origin - global_position, (ray_target1 - global_position).rotated(-rotation), Color.RED,3)
+	#draw_line(ray_origin - global_position, (ray_target2 - global_position).rotated(-rotation), Color.RED,3)
 	pass

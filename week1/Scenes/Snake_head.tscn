@@ -10,7 +10,13 @@ radius = 20.0
 
 [node name="Head" type="CharacterBody2D"]
 script = ExtResource("1_qcjau")
-speed = 800.0
+speed = 50.0
+segment_length = 50
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(400, 90, 400, -90, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_at4yp")
@@ -30,6 +36,4 @@ mesh = SubResource("SphereMesh_xxolt")
 [node name="CanvasLayer" type="Node" parent="."]
 
 [node name="Body" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("2_iabfm")]
-leg_target_pos = Vector2(80, -30)
-foot_reset_circle = 60
 target = NodePath("../..")

@@ -1,15 +1,16 @@
 extends Line2D
 
-@export var segment_count = 7
-@export var segment_length = 20
-@export var max_angle_degrees = 50.0
-@export var leg_start = 2
-@export var leg_gap = 2
-@export var leg_end = 3
-@export var leg_target_pos = Vector2(50,10)
-@export var foot_reset_circle = 30
-@export var inter_rate = 0.5
 @export var target:Node2D
+var segment_count = 7
+var segment_length = 20
+var max_angle_degrees = 50.0
+var leg_start = 2
+var leg_gap = 2
+var leg_end = 3
+var leg_target_pos = Vector2(50,10)
+var foot_reset_circle = 30
+
+@export var inter_rate = 0.5
 
 var leg_indices:Array[int]
 var leg_left_position:Array[Vector2]
@@ -22,6 +23,15 @@ var leg_joints_left = []
 var leg_joints_right = []
 
 func _ready() -> void:
+	segment_count = target.segment_count
+	segment_length = target.segment_length
+	max_angle_degrees = target.max_angle_degrees
+	leg_start = target.leg_start
+	leg_gap = target.leg_gap
+	leg_end = target.leg_end
+	foot_reset_circle = target.foot_reset_circle
+	leg_target_pos = target.leg_target_pos
+	
 	for i in segment_count:
 		add_point(Vector2(0,i * segment_length))
 		
@@ -84,9 +94,9 @@ func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_jo
 	direction = Vector2(-direction.y, direction.x)
 	
 	
-	var cross_prod = cross_offset.cross(point_offset)
-	if(cross_prod * side <= 0):
-		return
+	#var cross_prod = cross_offset.cross(point_offset)
+	#if(cross_prod * side <= 0):
+		#return
 	
 	#if(side == -1):
 		#leg_joint[leg_index][1] = leg_joint[leg_index][1] + cross_prod * direction + Vector2(0.5,0.5)
@@ -160,14 +170,14 @@ func _draw():
 		pass
 	
 	for i in leg_indices.size():
-		draw_circle(get_point_position(leg_indices[i]), 10, Color.PINK)
+		#draw_circle(get_point_position(leg_indices[i]), 10, Color.PINK)
 	
-		draw_circle(leg_left_position[i], 10, Color.GREEN)
-		draw_circle(leg_left_position[i], foot_reset_circle, Color.ORANGE_RED,false)
-		draw_circle(leg_right_position[i], 10, Color.RED)
-		draw_circle(leg_right_position[i], foot_reset_circle, Color.ORANGE_RED,false)
+		#draw_circle(leg_left_position[i], 10, Color.GREEN)
+		#draw_circle(leg_left_position[i], foot_reset_circle, Color.ORANGE_RED,false)
+		#draw_circle(leg_right_position[i], 10, Color.RED)
+		#draw_circle(leg_right_position[i], foot_reset_circle, Color.ORANGE_RED,false)
 		
-		draw_circle(foot_left_target[i], 5, Color.HOT_PINK,false)
+		#draw_circle(foot_left_target[i], 5, Color.HOT_PINK,false)
 		for j in range(1,leg_joints_left[i].size()):
 			draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j],Color.TEAL,5)
 			pass
