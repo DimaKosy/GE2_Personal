@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://brhle7351anhe"]
+[gd_scene load_steps=5 format=3 uid="uid://brhle7351anhe"]
 
 [ext_resource type="Script" uid="uid://7i5qvypj3n3q" path="res://Scenes/snake_head.gd" id="1_qcjau"]
 [ext_resource type="PackedScene" uid="uid://cb8uywbnep3y7" path="res://Scenes/snake_body.tscn" id="2_iabfm"]
-[ext_resource type="Script" uid="uid://beydhjgwlh2xr" path="res://Scenes/area_2d.gd" id="3_iabfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_at4yp"]
 radius = 20.0
@@ -34,21 +33,3 @@ mesh = SubResource("SphereMesh_xxolt")
 leg_target_pos = Vector2(80, -30)
 foot_reset_circle = 60
 target = NodePath("../..")
-
-[node name="left" type="Area2D" parent="."]
-script = ExtResource("3_iabfm")
-
-[node name="leftView" type="CollisionPolygon2D" parent="left"]
-polygon = PackedVector2Array(300, -90, -90, -200, 0, 0)
-
-[node name="center" type="Area2D" parent="."]
-script = ExtResource("3_iabfm")
-
-[node name="centerView" type="CollisionPolygon2D" parent="center"]
-polygon = PackedVector2Array(300, -90, 300, 90, 0, 0)
-
-[node name="right" type="Area2D" parent="."]
-script = ExtResource("3_iabfm")
-
-[node name="rightView" type="CollisionPolygon2D" parent="right"]
-polygon = PackedVector2Array(-90, 200, 300, 90, 0, 0)

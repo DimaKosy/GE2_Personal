@@ -207,7 +207,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAA
 tile_set = SubResource("TileSet_tx0tn")
 
 [node name="RigidBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(0.45, 0.45)
 script = ExtResource("3_u7krg")
+speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 scale = Vector2(0.2, 0.2)
@@ -219,10 +221,4 @@ texture = ExtResource("4_6whob")
 shape = SubResource("RectangleShape2D_u7krg")
 
 [node name="Head" parent="." instance=ExtResource("5_u7krg")]
-position = Vector2(-100, -16)
-
-[node name="Head2" parent="." instance=ExtResource("5_u7krg")]
-position = Vector2(-100, -16)
-
-[node name="Head3" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(-100, -16)
