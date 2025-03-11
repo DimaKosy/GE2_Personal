@@ -220,3 +220,9 @@ shape = SubResource("RectangleShape2D_u7krg")
 
 [node name="Head" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(-100, -16)
+
+[node name="Head2" parent="." instance=ExtResource("5_u7krg")]
+position = Vector2(-100, -16)
+
+[node name="Head3" parent="." instance=ExtResource("5_u7krg")]
+position = Vector2(-100, -16)
