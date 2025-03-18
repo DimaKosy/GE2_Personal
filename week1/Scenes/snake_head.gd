@@ -23,6 +23,9 @@ var ray_target2 = Vector2(0,0)
 @export var leg_target_pos = Vector2(80,-30)
 @export var foot_reset_circle = 60
 
+var random_direction = -1
+
+
 func calculate(delta:float):
 	var polygon_node := find_child("Area2D").get_child(0) as CollisionPolygon2D
 	var los: PackedVector2Array = polygon_node.polygon
@@ -52,20 +55,26 @@ func ray_detection():
 	query2.collide_with_bodies = true
 
 	var result1 = space_state.intersect_ray(query1)
-	var result2 = space_state.intersect_ray(query1)
-
+	var result2 = space_state.intersect_ray(query2)
+	
+	if random_direction == -1:
+		result1 = space_state.intersect_ray(query2)
+		result2 = space_state.intersect_ray(query1)
+	
+	
+	
 	if result1:
 		var collider = result1.get("collider")
-		print(collider)
+		#print(collider)
 		if collider is TileMapLayer:
-			print("Ray hit a TileMap with collision at position: ", result1.position)
-			ran_dir += deg_to_rad(30 * ray_length/(result1.position - global_position).length())
+			#print("Ray hit a TileMap with collision at position: ", result1.position)
+			ran_dir -= random_direction * deg_to_rad(30 * ray_length/(result1.position - global_position).length())
 	elif result2:
 		var collider = result2.get("collider")
-		print(collider)
+		#print(collider)
 		if collider is TileMapLayer:
-			print("Ray hit a TileMap with collision at position: ", result2.position)
-			ran_dir -= deg_to_rad(30 * ray_length/(result2.position - global_position).length())
+			#print("Ray hit a TileMap with collision at position: ", result2.position)
+			ran_dir += random_direction * deg_to_rad(30 * ray_length/(result2.position - global_position).length())
 	pass
 
 func wander(delta: float) -> Vector2:

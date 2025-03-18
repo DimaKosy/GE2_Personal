@@ -1,22 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://brhle7351anhe"]
+[gd_scene load_steps=6 format=3 uid="uid://brhle7351anhe"]
 
 [ext_resource type="Script" uid="uid://7i5qvypj3n3q" path="res://Scenes/snake_head.gd" id="1_qcjau"]
 [ext_resource type="PackedScene" uid="uid://cb8uywbnep3y7" path="res://Scenes/snake_body.tscn" id="2_iabfm"]
+[ext_resource type="Texture2D" uid="uid://cq3prle7ka8o1" path="res://assets/Snake_head.tres" id="3_at4yp"]
 [ext_resource type="Texture2D" uid="uid://diu8csinfj68a" path="res://icon.svg" id="3_iabfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_at4yp"]
 radius = 20.0
 
-[sub_resource type="Gradient" id="Gradient_iabfm"]
-offsets = PackedFloat32Array(0, 0.526667, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.755421, 0, 0.149589, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_at4yp"]
-gradient = SubResource("Gradient_iabfm")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
-
 [node name="Head" type="CharacterBody2D"]
+z_index = 2
 script = ExtResource("1_qcjau")
 speed = 50.0
 segment_length = 50
@@ -41,7 +34,7 @@ polygon = PackedVector2Array(-0.575, -0.45, 0, -0.775, 1.3, -0.35, 1.3, 0.35, 3.
 
 [node name="Body" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("2_iabfm")]
 points = PackedVector2Array(312, 68)
-texture = SubResource("GradientTexture2D_at4yp")
+texture = ExtResource("3_at4yp")
 texture_mode = 2
 target = NodePath("../..")
 

@@ -11,6 +11,7 @@ var leg_target_pos = Vector2(50,10)
 var foot_reset_circle = 30
 
 @export var inter_rate = 0.5
+@export var leg:PackedScene
 
 var leg_indices:Array[int]
 var leg_left_position:Array[Vector2]
@@ -22,7 +23,11 @@ var foot_right_target:Array[Vector2]
 var leg_joints_left = []
 var leg_joints_right = []
 
+
+
 func _ready() -> void:
+	z_index = 1
+	
 	segment_count = target.segment_count
 	segment_length = target.segment_length
 	max_angle_degrees = target.max_angle_degrees
@@ -48,63 +53,52 @@ func _ready() -> void:
 		foot_left_target.append(Vector2(0,0))
 		foot_right_target.append(Vector2(0,0))
 		
-		leg_joints_left.append([])
-		leg_joints_right.append([])
+		var left_leg:Line2D = leg.instantiate()
+		var right_leg:Line2D = leg.instantiate()
+		left_leg.width = 2
+		right_leg.width = 2
+		
+		# setting the leg ordering
+		left_leg.z_index = 0
+		right_leg.z_index = 0
+		left_leg.z_as_relative = true
+		right_leg.z_as_relative = true
+		
+		add_child(left_leg)
+		add_child(right_leg)
+		
+		
+		
+		leg_joints_left.append(left_leg)
+		leg_joints_right.append(right_leg)
+		
 		for j in range(3):
-			leg_joints_left[leg_joints_left.size() - 1].append(
-				Vector2(0,0)
-			)
-			leg_joints_right[leg_joints_right.size() - 1].append(
-				Vector2(0,0)
-			)
+			leg_joints_left[leg_joints_left.size() - 1].add_point(Vector2(0,0))
+			leg_joints_right[leg_joints_right.size() - 1].add_point(Vector2(0,0))
 			pass
 		
 		pass	
 	pass
 
 func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_joint:Array, side:int):
-	var cur_pos = leg_joint[leg_index][0]
+	leg_joint[leg_index].set_point_position(0, source)
 	
-	var set_point = cur_pos + (destination - cur_pos) * inter_rate
-	leg_joint[leg_index][0] = set_point
+	# move the end point 
+	var last_index = leg_joint[leg_index].get_point_count() - 1
+	var current_end = leg_joint[leg_index].get_point_position(last_index)
+	var new_end = current_end + (destination - current_end) * inter_rate
+	leg_joint[leg_index].set_point_position(last_index, new_end)
 	
-	for i in range(1,leg_joint[leg_index].size()):
-		cur_pos = leg_joint[leg_index][i]
-		var prev_pos = leg_joint[leg_index][i - 1]
-		var to_cur = cur_pos - prev_pos
-
-		
-		var direction = to_cur.normalized()
-		var target_pos = prev_pos + direction * segment_length
-
-		leg_joint[leg_index][i] = prev_pos + direction * segment_length
-		
-		pass
+	# move the points back
+	for i in range(last_index - 1, 0, -1):
+		var next_pos = leg_joint[leg_index].get_point_position(i + 1)
+		var dir = (leg_joint[leg_index].get_point_position(i) - next_pos).normalized()
+		leg_joint[leg_index].set_point_position(i, next_pos + dir * segment_length)
 	
-	var last_joint_pos = leg_joint[leg_index][leg_joint[leg_index].size()-1]
-	for i in range(0,leg_joint[leg_index].size()):
-		leg_joint[leg_index][i] -= (last_joint_pos - source)
-		pass
-	
-	#limit the rotation
-	var cross_offset = leg_joint[leg_index][2] - leg_joint[leg_index][0]
-	var point_offset = leg_joint[leg_index][1] - leg_joint[leg_index][0]
-	
-	var direction = cross_offset.normalized()
-	direction = Vector2(-direction.y, direction.x)
-	
-	
-	#var cross_prod = cross_offset.cross(point_offset)
-	#if(cross_prod * side <= 0):
-		#return
-	
-	#if(side == -1):
-		#leg_joint[leg_index][1] = leg_joint[leg_index][1] + cross_prod * direction + Vector2(0.5,0.5)
-		#pass
-	#if(side == 1):
-		#leg_joint[leg_index][1] = leg_joint[leg_index][1] - cross_prod * direction - Vector2(0.5,0.5)
-		#pass
-	
+	for i in range(1, leg_joint[leg_index].get_point_count()):
+		var prev = leg_joint[leg_index].get_point_position(i - 1)
+		var dir = (leg_joint[leg_index].get_point_position(i) - prev).normalized()
+		leg_joint[leg_index].set_point_position(i, prev + dir * segment_length)
 	pass
 
 func _process(delta: float) -> void:
@@ -151,8 +145,18 @@ func _process(delta: float) -> void:
 			foot_right_target[i] = leg_right_position[i]#leg_right_position[i] + (leg_right_position[i] - foot_right_target[i]).normalized()*foot_reset_circle
 			
 			pass
-		leg_joint_update(get_point_position(leg_indices[i]), foot_left_target[i], i, leg_joints_left, -1)
-		leg_joint_update(get_point_position(leg_indices[i]), foot_right_target[i], i, leg_joints_right, 1)
+				# Offset amount — adjust as needed
+		var offset_distance = 10.0
+
+		# For left leg
+		var left_source = get_point_position(leg_indices[i]) + left_direction * offset_distance
+		leg_joint_update(left_source, foot_left_target[i], i, leg_joints_left, -1)
+
+		# For right leg
+		var right_source = get_point_position(leg_indices[i]) + right_direction * offset_distance
+		leg_joint_update(right_source, foot_right_target[i], i, leg_joints_right, 1)
+		
+		#print(leg_joints_left[i]) 
 		pass
 	pass
 
@@ -169,7 +173,7 @@ func _draw():
 		draw_circle(point_pos, w*4, Color.ORANGE_RED)
 		pass
 	
-	for i in leg_indices.size():
+	#for i in leg_indices.size():
 		#draw_circle(get_point_position(leg_indices[i]), 10, Color.PINK)
 	
 		#draw_circle(leg_left_position[i], 10, Color.GREEN)
@@ -178,14 +182,14 @@ func _draw():
 		#draw_circle(leg_right_position[i], foot_reset_circle, Color.ORANGE_RED,false)
 		
 		#draw_circle(foot_left_target[i], 5, Color.HOT_PINK,false)
-		var offset:float = leg_indices[i] / float(get_point_count())
+		#var offset:float = leg_indices[i] / float(get_point_count())
 		
-		for j in range(1,leg_joints_left[i].size()):
-			draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j], Color.TEAL, 2* width_curve.sample(offset))
-			pass
-		#draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
-		for j in range(1,leg_joints_right[i].size()):
-			draw_line(leg_joints_right[i][j-1], leg_joints_right[i][j],Color.TEAL, 2* width_curve.sample(offset))
-			pass
-		pass
+		#for j in range(1,leg_joints_left[i].size()):
+			#draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j], Color.TEAL, 2* width_curve.sample(offset))
+			#pass
+		##draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
+		#for j in range(1,leg_joints_right[i].size()):
+			#draw_line(leg_joints_right[i][j-1], leg_joints_right[i][j],Color.TEAL, 2* width_curve.sample(offset))
+			#pass
+		#pass
 	pass

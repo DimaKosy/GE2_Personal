@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://54mh60omp53p"]
+
+[sub_resource type="Curve" id="Curve_xvked"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 4.38202), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_iabfm"]
+offsets = PackedFloat32Array(0.526667)
+colors = PackedColorArray(0.356523, 0, 0.0488832, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xvked"]
+gradient = SubResource("Gradient_iabfm")
+fill_to = Vector2(0, 1)
+
+[node name="Line2D" type="Line2D"]
+z_index = 1
+width_curve = SubResource("Curve_xvked")
+texture = SubResource("GradientTexture2D_xvked")
