@@ -178,12 +178,14 @@ func _draw():
 		#draw_circle(leg_right_position[i], foot_reset_circle, Color.ORANGE_RED,false)
 		
 		#draw_circle(foot_left_target[i], 5, Color.HOT_PINK,false)
+		var offset:float = leg_indices[i] / float(get_point_count())
+		
 		for j in range(1,leg_joints_left[i].size()):
-			draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j],Color.TEAL,5)
+			draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j], Color.TEAL, 2* width_curve.sample(offset))
 			pass
-		draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
+		#draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
 		for j in range(1,leg_joints_right[i].size()):
-			draw_line(leg_joints_right[i][j-1], leg_joints_right[i][j],Color.TEAL,5)
+			draw_line(leg_joints_right[i][j-1], leg_joints_right[i][j],Color.TEAL, 2* width_curve.sample(offset))
 			pass
 		pass
 	pass

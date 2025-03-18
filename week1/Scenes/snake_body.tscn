@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://snake_body.gd" id="1_16tbv"]
 
 [sub_resource type="Curve" id="Curve_16tbv"]
-_limits = [0.05, 3.0, 0.0, 1.0]
-_data = [Vector2(0, 2.46947), 0.0, -2.78427, 0, 0, Vector2(0.705882, 1.47528), -4.86849, -4.86849, 0, 0, Vector2(1, 0.38146), -1.45415, 0.0, 0, 0]
+_limits = [0.05, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, -8.58174, 0, 0, Vector2(0.75, 2.55281), -4.54213, -4.54213, 0, 0, Vector2(1, 0.38146), -1.45415, 0.0, 0, 0]
 point_count = 3
 
 [node name="Body" type="Line2D"]
