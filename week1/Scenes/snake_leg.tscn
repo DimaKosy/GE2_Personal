@@ -2,7 +2,7 @@
 
 [sub_resource type="Curve" id="Curve_xvked"]
 _limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 4.38202), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 1.76136), -5.91033, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_iabfm"]
@@ -17,3 +17,6 @@ fill_to = Vector2(0, 1)
 z_index = 1
 width_curve = SubResource("Curve_xvked")
 texture = SubResource("GradientTexture2D_xvked")
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2

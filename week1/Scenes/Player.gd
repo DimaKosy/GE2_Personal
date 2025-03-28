@@ -10,7 +10,7 @@ func _process(delta: float):
 	
 	v.y += Input.get_axis("ui_up","ui_down")*0.1
 	z += Input.get_axis("ui_page_up", "ui_page_down")*0.1
-	z = min(max(z, 0.2),3)
+	z = min(max(z, 0.5),5)
 	#print(z)
 	find_child("Camera2D").zoom = Vector2(1,1)/Vector2(z,z)
 	
