@@ -36,6 +36,7 @@ func _ready() -> void:
 	leg_end = target.leg_end
 	foot_reset_circle = target.foot_reset_circle
 	leg_target_pos = target.leg_target_pos
+	texture = target.my_texture
 	
 	for i in segment_count:
 		add_point(Vector2(0,i * segment_length))
@@ -63,6 +64,30 @@ func _ready() -> void:
 		right_leg.z_index = 0
 		left_leg.z_as_relative = true
 		right_leg.z_as_relative = true
+		
+		#texture
+		var gradient := Gradient.new()
+		
+	
+		var grad_offset = i/float(segment_count);
+		
+		
+		gradient.add_point(0.0, texture.gradient.sample(grad_offset))
+		gradient.add_point(1.0, Color.BLACK)
+		
+		print(texture.gradient.get_color(grad_offset))
+		
+		
+		var gradient_texture := GradientTexture1D.new()
+		gradient_texture.gradient = gradient
+		
+		left_leg.texture_mode = Line2D.LINE_TEXTURE_TILE
+		right_leg.texture_mode = Line2D.LINE_TEXTURE_TILE
+		left_leg.texture = gradient_texture
+		right_leg.texture = gradient_texture
+		
+		#leg width
+		
 		
 		add_child(left_leg)
 		add_child(right_leg)
@@ -170,7 +195,7 @@ func _draw():
 		var w = width_curve.sample(offset)
 		#print("W" + str(w))
 		
-		draw_circle(point_pos, w*4, Color.ORANGE_RED)
+		#draw_circle(point_pos, w*4, Color.ORANGE_RED)
 		pass
 	
 	#for i in leg_indices.size():

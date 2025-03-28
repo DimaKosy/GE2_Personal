@@ -22,6 +22,7 @@ var ray_target2 = Vector2(0,0)
 @export var leg_end = 3
 @export var leg_target_pos = Vector2(80,-30)
 @export var foot_reset_circle = 60
+@export var my_texture:GradientTexture1D
 
 var random_direction = -1
 

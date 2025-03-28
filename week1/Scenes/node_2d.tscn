@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://v4cnsxi6sxbh"]
+[gd_scene load_steps=18 format=4 uid="uid://v4cnsxi6sxbh"]
 
 [ext_resource type="Texture2D" uid="uid://cvlodduecaf3k" path="res://assets/Hana Caraka - Farming n Foraging [sample]/misc.png" id="1_v1qfn"]
 [ext_resource type="Texture2D" uid="uid://uf8f3g7w6xjm" path="res://assets/Hana Caraka - Farming n Foraging [sample]/info.png" id="2_hh5uf"]
@@ -198,6 +198,31 @@ sources/1 = SubResource("TileSetAtlasSource_u7krg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7krg"]
 
+[sub_resource type="Gradient" id="Gradient_u7krg"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tx0tn"]
+gradient = SubResource("Gradient_u7krg")
+
+[sub_resource type="Gradient" id="Gradient_tx0tn"]
+offsets = PackedFloat32Array(0, 0.496259, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.475056, 0.848544, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wjtap"]
+gradient = SubResource("Gradient_tx0tn")
+
+[sub_resource type="Gradient" id="Gradient_wjtap"]
+offsets = PackedFloat32Array(0, 0.254364, 0.523691, 0.758105, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v7gqg"]
+gradient = SubResource("Gradient_wjtap")
+
+[sub_resource type="Gradient" id="Gradient_chwn1"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hvaui"]
+gradient = SubResource("Gradient_chwn1")
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -226,15 +251,18 @@ disabled = true
 [node name="Head" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(-100, -16)
 segment_count = 10
+my_texture = SubResource("GradientTexture1D_tx0tn")
 
 [node name="Head2" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(-717, -348)
+my_texture = SubResource("GradientTexture1D_wjtap")
 
 [node name="Head3" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(499, -306)
 segment_count = 104
 leg_gap = 1
 leg_end = 2
+my_texture = SubResource("GradientTexture1D_v7gqg")
 
 [node name="Head4" parent="." instance=ExtResource("5_u7krg")]
 position = Vector2(751, 321)
@@ -244,3 +272,4 @@ max_angle_degrees = 70.0
 leg_start = 5
 leg_gap = 10
 leg_end = 5
+my_texture = SubResource("GradientTexture1D_hvaui")
