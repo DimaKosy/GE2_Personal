@@ -13,7 +13,7 @@ var foot_reset_circle = 30
 @export var inter_rate = 0.5
 @export var leg:PackedScene
 
-var leg_indices:Array[int]
+var leg_indices:Array[int] #for the body index relative to leg
 var leg_left_position:Array[Vector2]
 var leg_right_position:Array[Vector2]
 
@@ -73,6 +73,7 @@ func _ready() -> void:
 		
 		
 		gradient.add_point(0.0, texture.gradient.sample(grad_offset))
+		#gradient.add_point(1.0, Color.BLACK)
 		gradient.add_point(1.0, Color.BLACK)
 		
 		print(texture.gradient.get_color(grad_offset))
@@ -170,8 +171,8 @@ func _process(delta: float) -> void:
 			foot_right_target[i] = leg_right_position[i]#leg_right_position[i] + (leg_right_position[i] - foot_right_target[i]).normalized()*foot_reset_circle
 			
 			pass
-				# Offset amount — adjust as needed
-		var offset_distance = 10.0
+			
+		var offset_distance = width_curve.sample(leg_indices[i]/float(get_point_count())) * 2.0
 
 		# For left leg
 		var left_source = get_point_position(leg_indices[i]) + left_direction * offset_distance

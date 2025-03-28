@@ -26,6 +26,9 @@ var ray_target2 = Vector2(0,0)
 
 var random_direction = -1
 
+func _ready() -> void:
+	find_child("MeshInstance2D").modulate = my_texture.gradient.get_color(0)
+	pass
 
 func calculate(delta:float):
 	var polygon_node := find_child("Area2D").get_child(0) as CollisionPolygon2D
