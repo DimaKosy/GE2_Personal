@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://brhle7351anhe"]
 
-[ext_resource type="Script" uid="uid://7i5qvypj3n3q" path="res://Scenes/snake_head.gd" id="1_qcjau"]
+[ext_resource type="Script" uid="uid://7i5qvypj3n3q" path="res://Scripts/snake_head.gd" id="1_qcjau"]
 [ext_resource type="PackedScene" uid="uid://cb8uywbnep3y7" path="res://Scenes/snake_body.tscn" id="2_iabfm"]
 [ext_resource type="Texture2D" uid="uid://cq3prle7ka8o1" path="res://assets/Snake_head.tres" id="3_at4yp"]
 [ext_resource type="Texture2D" uid="uid://diu8csinfj68a" path="res://icon.svg" id="3_iabfm"]

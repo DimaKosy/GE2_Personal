@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cb8uywbnep3y7"]
 
-[ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://snake_body.gd" id="1_16tbv"]
+[ext_resource type="Script" uid="uid://bxvwsj8nfah6b" path="res://Scripts/snake_body.gd" id="1_16tbv"]
 [ext_resource type="PackedScene" uid="uid://54mh60omp53p" path="res://Scenes/snake_leg.tscn" id="2_bkhr2"]
 
 [sub_resource type="Curve" id="Curve_16tbv"]

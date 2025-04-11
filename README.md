@@ -1,14 +1,13 @@
 # Project Title
 
-Name:
+Name: Dmytro Kosynskyy
 
-Student Number: 
+Student Number: C21376161
 
-Class Group:
-
-Include all team members names and student numbers if a team project
+Class Group: TU858
 
 # Description
+Simulation of critters using procedural kinematics simulation
 
 ## Video:
 
@@ -16,27 +15,38 @@ Include all team members names and student numbers if a team project
 
 ## Screenshots
 
+![An image](C1.PNG)
+
+![An image](C2.PNG)
+
+![An image](C3.PNG)
+
 # Instructions
 
+This is a showcase of inverse kinematics and how it can be used to create reptiles, insects and other animals
+There is a tilemap which can be used to edit the simulation space and a couple of preplaced "Animals"
+
 # How it works
+
+
 
 # List of classes/assets
 
 | Class/asset | Source |
 |-----------|-----------|
-| MyClass.cs | Self written |
-| MyClass1.cs | Modified from [reference]() |
-| MyClass2.cs | From [reference]() |
+| head.gd | Self written |
+| Player.gd | Self written |
+| snake_body.gd | Self written |
+| snake_head.gd | Self written |
 
-Each team member or individual needs to write a paragraph or two explaining what they contributed to the project
+| Hana Caraka tileset | gotten from [hyperlink](https://otterisk.itch.io/hana-caraka-farming-foraging) |
 
-- What they did
-- What they are most proud of
-- What they learned
 
 # References
-* Item 1
-* Item 2
+* Procedural Snake [hyperlink](https://www.youtube.com/watch?v=T73lvhhw_rA)
+* Kinematics https://www.youtube.com/watch?v=hbgDqyy8bIw
+* Kinematics https://www.youtube.com/watch?v=RTc6i-7N3ms
+
 
 # From here on, are examples of how to different things in Markdown. You can delete.  
 
