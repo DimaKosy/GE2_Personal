@@ -48,6 +48,32 @@ There is a tilemap which can be used to edit the simulation space and a couple o
 * Kinematics https://www.youtube.com/watch?v=RTc6i-7N3ms
 
 
+# Leg Kinematic solver
+
+```gd
+func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_joint:Array, side:int):
+	leg_joint[leg_index].set_point_position(0, source)
+	
+	# move the end point 
+	var last_index = leg_joint[leg_index].get_point_count() - 1
+	var current_end = leg_joint[leg_index].get_point_position(last_index)
+	var new_end = current_end + (destination - current_end) * inter_rate
+	leg_joint[leg_index].set_point_position(last_index, new_end)
+	
+	# move the points back
+	for i in range(last_index - 1, 0, -1):
+		var next_pos = leg_joint[leg_index].get_point_position(i + 1)
+		var dir = (leg_joint[leg_index].get_point_position(i) - next_pos).normalized()
+		leg_joint[leg_index].set_point_position(i, next_pos + dir * segment_length)
+	
+	for i in range(1, leg_joint[leg_index].get_point_count()):
+		var prev = leg_joint[leg_index].get_point_position(i - 1)
+		var dir = (leg_joint[leg_index].get_point_position(i) - prev).normalized()
+		leg_joint[leg_index].set_point_position(i, prev + dir * segment_length)
+	pass
+```
+
+
 # From here on, are examples of how to different things in Markdown. You can delete.  
 
 ## This is how to markdown text:
