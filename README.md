@@ -73,74 +73,35 @@ func leg_joint_update(source:Vector2, destination:Vector2, leg_index:int, leg_jo
 	pass
 ```
 
+# body Kinematic solver
+```gd
+var target_pos = get_point_position(0) + (target.global_position - get_point_position(0)) * inter_rate
+	
+	set_point_position(0, target_pos)
+	
 
-# From here on, are examples of how to different things in Markdown. You can delete.  
+	for i in range(1, get_point_count()):
+		var cur_pos = get_point_position(i)
+		var prev_pos = get_point_position(i - 1)
+		var to_cur = cur_pos - prev_pos
 
-## This is how to markdown text:
+		# Normalize direction and clamp distance
+		var direction = to_cur.normalized()
+		target_pos = prev_pos + direction * segment_length
 
-This is *emphasis*
+		# Angle limiting
+		if i > 1:
+			var base_dir = (get_point_position(i - 1) - get_point_position(i - 2)).normalized()
+			var angle = base_dir.angle_to(direction)
+			var max_angle = deg_to_rad(max_angle_degrees)
 
-This is a bulleted list
+			if abs(angle) > max_angle:
+				direction = base_dir.rotated(clamp(angle, -max_angle, max_angle))
 
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
+		set_point_position(i, prev_pos + direction * segment_length)
 ```
 
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
+# video demo
 
 [![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
 
