@@ -100,8 +100,3 @@ var target_pos = get_point_position(0) + (target.global_position - get_point_pos
 
 		set_point_position(i, prev_pos + direction * segment_length)
 ```
-
-# video demo
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
