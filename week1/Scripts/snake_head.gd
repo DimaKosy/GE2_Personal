@@ -70,13 +70,14 @@ func ray_detection():
 	if result1:
 		var collider = result1.get("collider")
 		#print(collider)
-		if collider is TileMapLayer:
+		if collider is TileMapLayer or Line2D:
 			#print("Ray hit a TileMap with collision at position: ", result1.position)
 			ran_dir -= random_direction * deg_to_rad(30 * ray_length/(result1.position - global_position).length())
 	elif result2:
 		var collider = result2.get("collider")
+		#if collider is Line2D:
 		#print(collider)
-		if collider is TileMapLayer:
+		if collider is TileMapLayer or Line2D:
 			#print("Ray hit a TileMap with collision at position: ", result2.position)
 			ran_dir += random_direction * deg_to_rad(30 * ray_length/(result2.position - global_position).length())
 	pass

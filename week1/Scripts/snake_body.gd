@@ -39,7 +39,14 @@ func _ready() -> void:
 	texture = target.my_texture
 	
 	for i in segment_count:
-		add_point(Vector2(0,i * segment_length))
+		add_point(Vector2(0,0))#i * segment_length
+		#for j in range(0, segment_count - 1):
+			#var new_shape = CollisionShape2D.new()
+			#$RigidBody2D.add_child(new_shape)
+			#var segment = SegmentShape2D.new()
+			#segment.a = Vector2(0,i * segment_length)
+			#segment.b = Vector2(0,(i + 1) * segment_length)
+			#new_shape.shape = segment
 		
 		if i < leg_start:
 			continue
@@ -76,7 +83,7 @@ func _ready() -> void:
 		#gradient.add_point(1.0, Color.BLACK)
 		gradient.add_point(1.0, Color.BLACK)
 		
-		print(texture.gradient.get_color(grad_offset))
+		#print(texture.gradient.get_color(grad_offset))
 		
 		
 		var gradient_texture := GradientTexture1D.new()
@@ -151,11 +158,22 @@ func _process(delta: float) -> void:
 
 			if abs(angle) > max_angle:
 				direction = base_dir.rotated(clamp(angle, -max_angle, max_angle))
-
+				pass
+		
+			
+			#var segment = SegmentShape2D.new()
+			#segment.a = get_point_position(i-1)
+			#segment.b = prev_pos + direction * segment_length
+			#get_child(0).get_child(i -1).shape = segment
+			#print(get_child(0).get_child(i -1).shape.a)
 		set_point_position(i, prev_pos + direction * segment_length)
 		
 	for i in leg_indices.size():
-		var direction = (get_point_position(leg_indices[i]) - get_point_position(leg_indices[i] - 1)).normalized()
+		var direction
+		if i != 0:
+			direction = (get_point_position(leg_indices[i]) - get_point_position(leg_indices[i] - 1)).normalized()
+		else:
+			direction = (get_point_position(leg_indices[i]) - get_point_position(leg_indices[i] + 1)).normalized().rotated(PI)
 		var left_direction = Vector2(-direction.y, direction.x)
 		var right_direction = Vector2(direction.y, -direction.x)
 		
@@ -213,7 +231,7 @@ func _draw():
 		#for j in range(1,leg_joints_left[i].size()):
 			#draw_line(leg_joints_left[i][j-1], leg_joints_left[i][j], Color.TEAL, 2* width_curve.sample(offset))
 			#pass
-		##draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
+		#draw_circle(foot_right_target[i], 5, Color.HOT_PINK,false)
 		#for j in range(1,leg_joints_right[i].size()):
 			#draw_line(leg_joints_right[i][j-1], leg_joints_right[i][j],Color.TEAL, 2* width_curve.sample(offset))
 			#pass

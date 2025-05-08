@@ -18,7 +18,7 @@ my_texture = ExtResource("3_at4yp")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(400, 90, 400, -90, 35.4656, -7.97977, 0, 0)
+polygon = PackedVector2Array(400, 120, 400, -120, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_at4yp")
