@@ -26,6 +26,10 @@ Simulation of critters using procedural kinematics simulation
 This is a showcase of inverse kinematics and how it can be used to create reptiles, insects and other animals
 There is a tilemap which can be used to edit the simulation space and a couple of preplaced "Animals"
 
+If you hover the mouse infront of the animals they will follow it
+
+if you wish to add more you can copy them in the editor and edit their leg amount spacing and other features
+
 # How it works
 
 
