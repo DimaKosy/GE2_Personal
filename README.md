@@ -11,7 +11,7 @@ Simulation of critters using procedural kinematics simulation
 
 ## Video:
 
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](http://img.youtube.com/vi/2Ol_VMv9sjg/0.jpg)](https://www.youtube.com/watch?v=2Ol_VMv9sjg)
 
 ## Screenshots
 
